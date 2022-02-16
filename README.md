@@ -1,4 +1,4 @@
-# Couchbase Inter Sync Gateway Replication Demo
+# Couchbase Inter-Sync Gateway Replication Demo
 This demo will be demonstrate how to configure Inter Sync Gateway replication.
 
 This demo will deploy:
