@@ -1,0 +1,112 @@
+{
+    "log": ["*"],
+    "adminInterface":"admin_interface",
+    "interface": "main_interface",
+    "metricsInterface":"metrics_interface", 
+    "databases": {
+      "store_local": {
+        "server": "http://couchbase:8091",
+        "bucket": "store_local",
+        "username": "Administrator",
+        "password": "password",
+        "num_index_replicas": 0,
+        "enable_shared_bucket_access": true,
+        "import_docs": true,
+        "users":{
+          "admin": {"password": "password", "admin_channels": ["*"]},
+          "store1": {"password": "password", "admin_channels":["channel:product.storeId.1","channel:order.storeId.1","channel:common"]}
+        },
+        "sgreplicate_enabled":true,
+        "replications":{
+          "pushandpull-with-target-continuous" : {
+            "conflict_resolution_type":"custom",
+            "custom_conflict_resolver":`function(conflict) {
+              if ( (conflict.LocalDocument.type !== null) && (conflict.RemoteDocument.type !== null) && (conflict.LocalDocument.type == "usedefault")) {
+                        console.log("Will use default policy");
+                        return defaultPolicy(conflict);
+              }
+              else {
+                  var remoteDoc = conflict.RemoteDocument;
+                  console.log("full remoteDoc doc: "+JSON.stringify(remoteDoc));
+                  var localDoc = conflict.LocalDocument;
+                  console.log("full localDoc doc: "+JSON.stringify(localDoc));
+                  var mergedDoc = extend({}, localDoc, remoteDoc);
+                 
+                  console.log("full merged doc: "+JSON.stringify(mergedDoc));
+                  return mergedDoc;
+                  
+                  function extend(target) {
+                      var sources = [].slice.call(arguments, 1);
+                      sources.forEach(function (source) {
+                          for (var prop in source) {
+                              target[prop] = source[prop];
+                          }
+                      });
+                      return target;
+                  }
+              }
+            }`,
+            "direction": "pushAndPull",
+            "purge_on_removal":true,
+            "remote": "remote_address",
+            "username":"store1",
+            "password":"password",
+            "filter":"sync_gateway/bychannel",
+            "query_params": {
+                "channels":["channel:product.storeId.1","channel:order.storeId.1"]
+            },
+            "enable_delta_sync":  true,
+            "batch_size" :1000,
+            "continuous": true,
+            "initial_state": "stopped"
+        },           
+            "pull-from-target-continuous" : {
+                "direction": "pull",
+                "conflict_resolution_type":"remoteWins",
+                "purge_on_removal":true,
+                "remote": "remote_address",
+                "username":"store1",
+                "password":"password",
+                "filter":"sync_gateway/bychannel",
+                "query_params": {
+                    "channels":["channel:common"]
+                },
+                "enable_delta_sync":  false,
+                "continuous": true,
+                "initial_state": "running"
+             }
+        },
+        "sync":  `
+        function sync(doc, oldDoc) {
+          /* sanity check */
+          // check if document was removed from server or via SDK
+          // In this case, just return
+          if (isRemoved()) {
+            return;
+          }
+  
+          /* Routing */
+          // Add doc to the user's channel.
+          if (doc.docType == "Order") {
+              channel("channel:order."+doc.storeId);
+          }
+          else if (doc.docType == "Product") {
+              channel("channel:product."+doc.storeId);
+          }
+          else {
+              channel("channel:common");
+          }
+  
+          // This is when document is removed via SDK or directly on server
+          function isRemoved() {
+            return( isDelete() && oldDoc == null);
+          }
+  
+          function isDelete() {
+            return (doc._deleted == true);
+          }
+        }
+           `     
+      }
+    }
+  }

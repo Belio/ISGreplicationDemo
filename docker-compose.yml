@@ -1,0 +1,59 @@
+---
+version: '3.3'
+services:
+  couchbase:
+    hostname: couchbase
+    container_name: couchbase-server
+    build:
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    ports:
+     - 8091-8096:8091-8096
+     - 11210:11210
+    volumes:
+      - ./docker/server/startup.sh:/startup.sh
+    environment:  
+      - CLUSTER_NAME=demo
+      - COUCHBASE_ADMINISTRATOR_USERNAME=Administrator
+      - COUCHBASE_ADMINISTRATOR_PASSWORD=password
+      - COUCHBASE_BUCKET=store_local
+      - COUCHBASE_RBAC_USERNAME=admin
+      - COUCHBASE_RBAC_PASSWORD=password
+      - COUCHBASE_RBAC_NAME=admin
+  sync-gateway1:
+    hostname: sg1
+    image: couchbase/sync-gateway:2.8.3-enterprise
+    entrypoint: ["sh","/config.sh"]
+    ports:
+      - 4984:4984
+      - 4985:4985
+      - 4986:4986
+    depends_on:
+      - couchbase
+    volumes:
+      - ./docker/sync-gateway/template.json:/etc/sync_gateway/template.json
+      - ./docker/sync-gateway/config.sh:/config.sh
+    environment:  
+      - ADMIN_INTERFACE=:4985
+      - INTERFACE=:4984
+      - METRICS_INTERFACE=:4986
+      - REMOTE_ADDRESS=$REMOTEIP
+  sync-gateway2:
+    hostname: sg2
+    image: couchbase/sync-gateway:2.8.3-enterprise
+    entrypoint: ["sh","/config.sh"]
+    ports:
+      - 5984:5984
+      - 5985:5985
+      - 5986:5986
+    depends_on:
+      - couchbase
+    volumes:
+      - ./docker/sync-gateway/template.json:/etc/sync_gateway/template.json
+      - ./docker/sync-gateway/config.sh:/config.sh
+    environment:  
+      - ADMIN_INTERFACE=:5985
+      - INTERFACE=:5984
+      - METRICS_INTERFACE=:5986
+      - REMOTE_ADDRESS=$REMOTEIP
+  
