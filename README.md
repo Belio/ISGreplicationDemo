@@ -1,7 +1,12 @@
-# ISGreplicationDemo
+# Couchbase Inter-Sync Gateway Replication Demo
+This demo will be demonstrate how to configure Inter Sync Gateway replication.
+
 This demo will deploy:
 - one node sync gateway + one node couchbase server on AWS
 - two nodes sync gateway + one node couchbase server locally through docker compose
+
+On the remote sync gateway some sample data (see stores.json) will be automatically loaded in Couchbase Server by the startup script.
+On the local sync gateway replica will be configured through JSON configuration: one for the common channel in pull and one for the store channel pushAndPull (bidirectional) 
 
 
 To run it:
@@ -20,4 +25,4 @@ aws ec2 create-key-pair \
 chmod 600 ${KEY_FILENAME}
 echo "Key saved to ${KEY_FILENAME}"
 
-3) launch sh startup.sh and choose a stack name
+3) launch sh startup.sh and choose a stack name (it is just the name of the stack to be deployed in your AWS account via Cloudformation)
