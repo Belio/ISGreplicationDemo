@@ -161,7 +161,7 @@ chmod 755 ${file}
 chown sync_gateway ${file}
 chgrp sync_gateway ${file}
 # Need to restart to load the changes
-sleep 40
+sleep 60
 
 echo "stop sync gateway"
 sync_gateway_pid=$(ps -ef | grep sync_gateway | awk 'NR==2{print $2}')
