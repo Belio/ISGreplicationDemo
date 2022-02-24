@@ -23,7 +23,7 @@ Services="data\\,index\\,query" #separate each service with \\, e.g data\\,index
 #Couchbase Sync Gateway Settings
 SyncGatewayVersion="2.8.3"
 SyncGatewayInstanceCount="1"
-SyncGatewayInstanceType="t3.xlarge"
+SyncGatewayInstanceType="t3.medium"
 
 aws cloudformation create-stack \
 --capabilities CAPABILITY_IAM \

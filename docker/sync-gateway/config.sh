@@ -7,7 +7,9 @@ done
 
 query_url=$(sed 's/8091/8093/g' <<< $couchbase_server_url)
 
-until $(curl --output /dev/null --head --fail --silent $query_url); do
+echo "endpoint is " $query_url/query/service
+
+until $(curl -u Administrator:password --output /dev/null --fail --silent $query_url/query/service -d 'statement=SELECT RAW 1'); do
       printf 'waiting for query service to be up...\n'
       sleep 15
 done
