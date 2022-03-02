@@ -58,7 +58,7 @@
             "enable_delta_sync":  true,
             "batch_size" :1000,
             "continuous": true,
-            "initial_state": "running"
+            "initial_state": "stopped"
         },           
             "pull-from-target-continuous" : {
                 "direction": "pull",
@@ -73,7 +73,7 @@
                 },
                 "enable_delta_sync":  false,
                 "continuous": true,
-                "initial_state": "running"
+                "initial_state": "stopped"
              }
         },
         "sync":  `
