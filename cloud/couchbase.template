@@ -118,7 +118,7 @@
   "SyncGatewayInstanceType": {
     "Description": "Instance type for Couchbase Sync Gateway Nodes",
     "Type": "String",
-    "Default": "c4.xlarge",
+    "Default": "t3.medium",
     "AllowedValues": [
         "c5n.xlarge",
         "t3.medium",
