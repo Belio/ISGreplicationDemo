@@ -55,12 +55,9 @@ echo "finding IP"
 ipAddress=$(aws ec2 describe-instances --instance-ids ${instanceIdServer} --region ${region} | grep -i PrivateIpAddress | awk '{ print $2 }' | head -1 | cut -d"," -f1 | sed -e 's/"//g')
 echo "ipaddress is "\'$ipAddress\'
 
-ip=http://$ipAddress:8091
-echo "wait for cluster to be ready on ip " \'$ip\'
-# wait for service to come up
-until $(curl --output /dev/null --head --fail $ip); do
-        printf '.'
-        sleep 1
+while ! { curl -X GET -u Administrator:password $ipAddress:8091/pools/default/buckets -H "accept: application/json" -s | grep -q '"status":"healthy"'; }; do
+  echo "Waiting for the Couchbase server on $ipAddress:8091 to become available"
+  sleep 15
 done
 echo "cluster is up"
 
