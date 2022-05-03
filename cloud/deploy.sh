@@ -13,17 +13,17 @@ KeyName="couchbase-${REGION}" #The ssh key that will be used to connect to the n
 License=BYOL #Couchbase Server license use: BYOL or HourlyPricing
 
 #Couchbase Server Settings
-InstanceType="t3.medium" #Couchbase Server Instance Type
+InstanceType="c4.xlarge" #Couchbase Server Instance Type
 ServerInstanceCount="1"
 ServerDiskSize="30"
-ServerVersion="6.6.5"
+ServerVersion="7.0.3"
 Services="data\\,index\\,query" #separate each service with \\, e.g data\\,index\\,query\\,fts\\,eventing\\,analytics
 
 
 #Couchbase Sync Gateway Settings
 SyncGatewayVersion="2.8.3"
 SyncGatewayInstanceCount="1"
-SyncGatewayInstanceType="t3.medium"
+SyncGatewayInstanceType="c4.2xlarge"
 
 aws cloudformation create-stack \
 --capabilities CAPABILITY_IAM \

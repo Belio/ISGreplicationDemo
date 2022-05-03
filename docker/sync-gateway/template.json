@@ -55,7 +55,7 @@
             "query_params": {
                 "channels":["channel:product.storeId.1","channel:order.storeId.1"]
             },
-            "enable_delta_sync":  true,
+            "enable_delta_sync":  false,
             "batch_size" :1000,
             "continuous": true,
             "initial_state": "stopped"
@@ -72,6 +72,7 @@
                     "channels":["channel:common"]
                 },
                 "enable_delta_sync":  false,
+                "batch_size" :1000,
                 "continuous": true,
                 "initial_state": "stopped"
              }

@@ -22,7 +22,7 @@
       "Type": "String",
       "Default": "6.6.5",
       "AllowedValues": [
-        "6.6.5","6.6.0", ",6.5.1", "6.5.0", "6.0.4", "6.0.3", "6.0.2", "6.0.1", "6.0.0"
+        "6.6.5","6.6.0", ",6.5.1", "6.5.0", "6.0.4", "6.0.3", "6.0.2", "6.0.1", "6.0.0", "7.0.3"
       ]
     },
     "SyncGatewayInstanceCount": {
@@ -56,10 +56,10 @@
     "InstanceType": {
       "Description": "Instance type for Couchbase Nodes",
       "Type": "String",
-      "Default": "t3.medium",
+      "Default": "c4.xlarge",
       "AllowedValues": [
           "c5n.xlarge",
-          "t3.medium",
+          "t3.xlarge",
           "m4.large",
           "m4.xlarge",
           "m4.2xlarge",
@@ -118,7 +118,7 @@
   "SyncGatewayInstanceType": {
     "Description": "Instance type for Couchbase Sync Gateway Nodes",
     "Type": "String",
-    "Default": "t3.medium",
+    "Default": "c4.2xlarge",
     "AllowedValues": [
         "c5n.xlarge",
         "t3.medium",

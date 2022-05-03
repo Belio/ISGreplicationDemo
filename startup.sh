@@ -35,4 +35,5 @@ export REMOTEIP=$ipAddress
 echo "remote ip is $REMOTEIP"
 docker compose stop
 docker compose rm -f
+docker rmi couchbase/sync-gateway
 docker-compose up -d
