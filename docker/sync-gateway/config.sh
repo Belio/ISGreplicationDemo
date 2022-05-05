@@ -20,6 +20,6 @@ remote="http://$REMOTE_ADDRESS:4984/stores"
 echo "remote address is $remote" 
 
 #configure replication with remote sync_gateway
-sed -e 's/admin_interface/'"$ADMIN_INTERFACE"'/g' -e 's/main_interface/'"$INTERFACE"'/g' -e 's/metrics_interface/'"$METRICS_INTERFACE"'/g' -e 's/remote_address/'"http:\/\/$REMOTE_ADDRESS:4984\/stores"'/g' /etc/sync_gateway/template.json > /etc/sync_gateway/config.json
+sed -e 's/admin_interface/'"$ADMIN_INTERFACE"'/g' -e 's/main_interface/'"$INTERFACE"'/g' -e 's/metrics_interface/'"$METRICS_INTERFACE"'/g' -e 's/remote_address/'"http:\/\/$REMOTE_ADDRESS:4984\/stores"'/g' /etc/sync_gateway/template.json > /home/sync_gateway/config.json
 
-/entrypoint.sh /etc/sync_gateway/config.json
+/entrypoint.sh /home/sync_gateway/config.json

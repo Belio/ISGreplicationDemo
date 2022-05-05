@@ -61,7 +61,7 @@ while ! { curl -X GET -u Administrator:password $ipAddress:8091/pools/default/bu
 done
 echo "cluster is up"
 
-file="/opt/sync_gateway/etc/sync_gateway.json"
+file="/home/sync_gateway/sync_gateway.json"
 echo '
 {
   "interface":":4984",
