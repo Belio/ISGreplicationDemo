@@ -95,6 +95,7 @@ echo '
       "enabled": true
     }
   },
+  "disable_persistent_config":true,
   "databases": {
     "stores": {
       "import_docs": true,
@@ -116,7 +117,6 @@ echo '
           "store1": {"password": "password", "admin_channels":["channel:product.storeId.1","channel:order.storeId.1","channel:common"]}
       },
     "sgreplicate_enabled":true,
-    "disable_persistent_config":true,
     "num_index_replicas":0,
     "sync": `
     function sync(doc, oldDoc) {

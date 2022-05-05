@@ -3,6 +3,7 @@
     "adminInterface":"admin_interface",
     "interface": "main_interface",
     "metricsInterface":"metrics_interface", 
+    "disable_persistent_config":true,
     "databases": {
       "store_local": {
         "server": "http://couchbase:8091",
@@ -17,7 +18,6 @@
           "store1": {"password": "password", "admin_channels":["channel:product.storeId.1","channel:order.storeId.1","channel:common"]}
         },
         "sgreplicate_enabled":true,
-        "disable_persistent_config":true
         "replications":{
           "pushandpull-with-target-continuous" : {
             "conflict_resolution_type":"custom",
