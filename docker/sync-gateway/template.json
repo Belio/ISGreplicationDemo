@@ -17,6 +17,7 @@
           "store1": {"password": "password", "admin_channels":["channel:product.storeId.1","channel:order.storeId.1","channel:common"]}
         },
         "sgreplicate_enabled":true,
+        "disable_persistent_config":true
         "replications":{
           "pushandpull-with-target-continuous" : {
             "conflict_resolution_type":"custom",

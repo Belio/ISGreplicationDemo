@@ -21,7 +21,7 @@ Services="data\\,index\\,query" #separate each service with \\, e.g data\\,index
 
 
 #Couchbase Sync Gateway Settings
-SyncGatewayVersion="2.8.3"
+SyncGatewayVersion="3.0.0"
 SyncGatewayInstanceCount="1"
 SyncGatewayInstanceType="c4.2xlarge"
 

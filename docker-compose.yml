@@ -22,7 +22,7 @@ services:
       - COUCHBASE_RBAC_NAME=admin
   sync-gateway1:
     hostname: sg1
-    image: couchbase/sync-gateway:2.8.3-enterprise
+    image: couchbase/sync-gateway:3.0.0-enterprise
     entrypoint: ["sh","/config.sh"]
     ports:
       - 4984:4984
