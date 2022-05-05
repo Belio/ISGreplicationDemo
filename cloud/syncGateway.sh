@@ -96,7 +96,7 @@ echo '
     }
   },
   "disable_persistent_config":true,
-  "server_tls_skip_verify":true,
+  "use_tls_server":false,
   "databases": {
     "stores": {
       "import_docs": true,
