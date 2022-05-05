@@ -4,6 +4,7 @@
     "interface": "main_interface",
     "metricsInterface":"metrics_interface", 
     "disable_persistent_config":true,
+    "server_tls_skip_verify":true,
     "databases": {
       "store_local": {
         "server": "http://couchbase:8091",

@@ -96,6 +96,7 @@ echo '
     }
   },
   "disable_persistent_config":true,
+  "server_tls_skip_verify":true,
   "databases": {
     "stores": {
       "import_docs": true,
@@ -165,6 +166,7 @@ sleep 60
 echo "stop sync gateway"
 sync_gateway_pid=$(ps -ef | grep sync_gateway | awk 'NR==2{print $2}')
 kill $sync_gateway_pid
+service sync_gateway stop
 sleep 60
 echo "start sync gateway"
 service sync_gateway start
